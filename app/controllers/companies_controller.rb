@@ -11,6 +11,10 @@ class CompaniesController < ApplicationController
     @company = Company.new
   end
 
+  def edit
+    @company = Company.find(params[:id])
+  end
+
   def create
     @company = Company.new(company_params)
 
@@ -18,7 +22,17 @@ class CompaniesController < ApplicationController
       redirect_to @company
     else
       render 'new'
-end
+    end
+  end
+
+  def update
+    @company = Company.find(params[:id])
+
+    if @company.update(company_params)
+      redirect_to @company
+    else
+      render 'edit'
+    end
   end
 
   private
